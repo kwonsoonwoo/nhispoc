@@ -39,7 +39,6 @@ local_ipv4 = local_ipv4_data.text
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    # '101.55.126.218',
     public_ipv4,
     local_ipv4,
 ]
