@@ -39,12 +39,7 @@ cmd = "ifconfig ens3 | grep Mask | cut -d: -f 2 | awk '{print$1}'"
 # local_ipv4_data = requests.get("http://169.254.169.254/latest/meta-data/local-ipv4")
 # local-ipv4 텍스트 변수 지정
 local_ipv4 = subprocess.check_output([cmd], shell=True, universal_newlines=True)
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    # public_ipv4,
-    local_ipv4,
-]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
