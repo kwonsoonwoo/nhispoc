@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import subprocess
+
 import requests
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,18 +30,19 @@ SECRET_KEY = '65bxujtubbl_13u$x-(p=#i**-qxr43w)7q@wc6#cc50)wi^!a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+cmd = "ifconfig ens3 | grep Mask | cut -d: -f 2 | awk '{print$1}'"
 # public-ipv4 파일 get 요청
-public_ipv4_data = requests.get("http://169.254.169.254/latest/meta-data/public-ipv4")
+# public_ipv4_data = requests.get("http://169.254.169.254/latest/meta-data/public-ipv4")
 # public-ipv4 텍스트 변수 지정
-public_ipv4 = public_ipv4_data.text
+# public_ipv4 = public_ipv4_data.text
 # local-ipv4 파일 get 요청
-local_ipv4_data = requests.get("http://169.254.169.254/latest/meta-data/local-ipv4")
+# local_ipv4_data = requests.get("http://169.254.169.254/latest/meta-data/local-ipv4")
 # local-ipv4 텍스트 변수 지정
-local_ipv4 = local_ipv4_data.text
+local_ipv4 = subprocess.check_output([cmd], shell=True, universal_newlines=True)
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    public_ipv4,
+    # public_ipv4,
     local_ipv4,
 ]
 
